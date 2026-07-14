@@ -1,0 +1,480 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAM Software Solutions</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+
+        header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,.08);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #444;
+            transition: .3s;
+        }
+
+            nav a:hover {
+                color: #4f46e5;
+            }
+
+        /* Hero */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 10%;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+            .hero-text h1 {
+                font-size: 55px;
+                margin-bottom: 20px;
+            }
+
+            .hero-text span {
+                color: #4f46e5;
+            }
+
+            .hero-text p {
+                font-size: 18px;
+                margin-bottom: 30px;
+                color: #666;
+            }
+
+        button {
+            padding: 15px 35px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+            button:hover {
+                background: #372fcf;
+                transform: translateY(-3px);
+            }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+            .hero-image img {
+                width: 100%;
+                max-width: 500px;
+                animation: float 3s ease-in-out infinite;
+            }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Features */
+
+        .features {
+            padding: 80px 10%;
+            background: white;
+        }
+
+            .features h2 {
+                text-align: center;
+                margin-bottom: 50px;
+                font-size: 40px;
+            }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #f8f8ff;
+            padding: 30px;
+            border-radius: 15px;
+            transition: .3s;
+        }
+
+            .card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 25px rgba(0,0,0,.1);
+            }
+
+            .card h3 {
+                margin-bottom: 15px;
+                color: #4f46e5;
+            }
+
+        /* CTA */
+
+        .cta {
+            text-align: center;
+            padding: 80px 20px;
+            background: #4f46e5;
+            color: white;
+        }
+
+            .cta h2 {
+                font-size: 40px;
+                margin-bottom: 20px;
+            }
+
+            .cta button {
+                background: white;
+                color: #4f46e5;
+            }
+
+                .cta button:hover {
+                    background: #f2f2f2;
+                }
+
+        /* Footer */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #222;
+            color: white;
+        }
+
+        /* Responsive */
+
+        @media(max-width:768px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .hero-text h1 {
+                font-size: 40px;
+            }
+
+            .hero {
+                text-align: center;
+            }
+        }
+
+        .fade {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 1s;
+        }
+
+            .fade.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+    </style>
+
+
+    <script landscape="JavaScript">
+window.onload = function () {
+
+    if (localStorage.getItem("loggedIn") === "true") {
+
+        document.getElementById("loginMenu").innerHTML =
+            '<a href="#" onclick="logout()">Logout</a>';
+
+    }
+
+}
+
+function logout() {
+
+    localStorage.clear();
+
+    window.location.href = "index.html";
+
+}
+    </script>
+
+</head>
+<body>
+
+    <header>
+
+        <nav>
+
+            <div class="logo">SAM Software Solutions</div>
+
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li id="loginMenu"><a href="#login">Login</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <section class="hero fade">
+
+        <div class="hero-text">
+
+            <h1>Empowering Businesses with <span>Smart Software Solutions</span></h1>
+
+            <p>
+                Welcome to <strong>SAM Software Solutions</strong>. We build secure,
+                scalable, and innovative software applications, websites, and cloud
+                solutions that help businesses grow faster in the digital world.
+            </p>
+
+            <button onclick="scrollServices()">
+                Explore Services
+            </button>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900"
+                 alt="Software Development">
+
+        </div>
+
+    </section>
+
+    <section class="features fade" id="login">
+
+        <h2>Login</h2>
+
+        <div style="max-width:450px;margin:auto;">
+
+            <input type="text" id="username" placeholder="Username" style="width:100%;padding:15px;margin-bottom:15px;border:1px solid #ccc;border-radius:8px;" />
+
+            <input type="password" placeholder="Password"
+                   style="width:100%;padding:15px;margin-bottom:20px;border:1px solid #ccc;border-radius:8px;">
+
+            <button style="width:100%;" onclick="login()">
+                Login
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="features fade" id="services">
+
+        <h2>Our Services</h2>
+
+        <div class="grid">
+
+            <div class="card">
+                <h3>💻 Web Development</h3>
+                <p>Responsive and modern websites for startups and enterprises.</p>
+            </div>
+
+            <div class="card">
+                <h3>📱 Mobile App Development</h3>
+                <p>Android and iOS applications with excellent user experience.</p>
+            </div>
+
+            <div class="card">
+                <h3>☁ Cloud Solutions</h3>
+                <p>Cloud migration, hosting, and scalable infrastructure.</p>
+            </div>
+
+            <div class="card">
+                <h3>🔒 Software Consulting</h3>
+                <p>Technology consulting, automation, and digital transformation.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="features fade" id="about">
+
+        <h2>About Us</h2>
+
+        <p style="max-width:900px;margin:auto;text-align:center;font-size:18px;">
+            SAM Software Solutions is a technology company dedicated to delivering
+            high-quality software products and IT services. Our mission is to help
+            businesses leverage technology through innovative, reliable, and
+            cost-effective solutions tailored to their needs.
+        </p>
+
+    </section>
+
+    <section class="features fade" id="features">
+
+        <h2>Why Choose Us?</h2>
+
+        <div class="grid">
+
+            <div class="card">
+                <h3>⚡ Fast</h3>
+                <p>Lightning-fast performance with optimized code.</p>
+            </div>
+
+            <div class="card">
+                <h3>📱 Responsive</h3>
+                <p>Looks amazing on desktop, tablet, and mobile devices.</p>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Beautiful Design</h3>
+                <p>Modern layouts with attractive colors and typography.</p>
+            </div>
+
+            <div class="card">
+                <h3>🔒 Secure</h3>
+                <p>Built using best practices for safety and reliability.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="cta fade" id="contact">
+
+        <h2>Contact Us</h2>
+
+        <p>Email: info@samsoftwaresolutions.com</p>
+        <p>Phone: +91-9876543210</p>
+        <p>Address: India</p>
+
+        <br>
+
+        <button onclick="joinNow()">
+            Request a Quote
+        </button>
+
+    </section>
+
+    <footer>
+
+        © 2025 Brand. All Rights Reserved.
+
+    </footer>
+
+    <script>
+
+function scrollServices(){
+    document.getElementById("services").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function login() {
+
+    const username = document.getElementById("username").value.trim();
+    const password = document.querySelector('input[type="password"]').value;
+
+    if (
+        (username === "admin" && password === "nimda") ||
+        (username === "samAdmin" && password === "NimdaSAM")
+    ) {
+
+        // Store login status
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("username", username);
+
+        // Redirect
+        window.location.href = "EmployeeList.html";
+        // If you want the misspelled name, use:
+        // window.location.href = "EmployyList.html";
+    }
+    else {
+        alert("Invalid username or password.");
+    }
+}
+
+function scrollFeatures(){
+    document.getElementById("features").scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+function joinNow(){
+    alert("Thanks for joining! 🎉");
+}
+
+// Fade animation
+
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
+},{
+    threshold:0.2
+});
+
+document.querySelectorAll(".fade").forEach(section=>{
+    observer.observe(section);
+});
+
+    </script>
+
+</body>
+</html>
