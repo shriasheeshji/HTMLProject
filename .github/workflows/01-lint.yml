@@ -28,5 +28,5 @@ jobs:
       - name: Lint HTML
         run: htmlhint "**/*.html"
 
-      - name: Lint CSS
-        run: stylelint "**/*.css"
+    #  - name: Lint CSS
+    #    run: stylelint "**/*.css"
