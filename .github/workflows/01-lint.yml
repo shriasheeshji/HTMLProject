@@ -8,21 +8,25 @@ permissions:
   contents: read
 
 jobs:
-  # 🔍 Check for HTML and CSS errors
   lint:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Check HTML Errors
-        uses: htmlhint/htmlhint-action@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          file_pattern: '**/*.html'
+          node-version: 20
 
-      - name: Check CSS Errors
-        uses: reviewdog/action-stylelint@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-check
-          stylelint_input: '**/*.css'
+      - name: Install HTMLHint and Stylelint
+        run: |
+          npm install -g htmlhint
+          npm install -g stylelint stylelint-config-standard
+
+      - name: Lint HTML
+        run: htmlhint "**/*.html"
+
+      - name: Lint CSS
+        run: stylelint "**/*.css"
