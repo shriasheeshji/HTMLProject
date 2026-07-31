@@ -1,0 +1,34 @@
+name: Lint and Deploy Static Content to Pages
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # 🔍 JOB 1: Check for HTML and CSS errors
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Check HTML Errors
+        uses: htmlhint/htmlhint-action@v2
+        with:
+          # Scans all HTML files in your project
+          file_pattern: '**/*.html'
+
+      - name: Check CSS Errors
+        uses: stylelint/actions-stylelint@v1
+        with:
+          # Scans all CSS files in your project
+          github_token: ${{ secrets.GITHUB_TOKEN }}
