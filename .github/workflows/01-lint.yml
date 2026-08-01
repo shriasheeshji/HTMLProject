@@ -9,24 +9,58 @@ permissions:
 
 jobs:
   lint:
+    name: Validate HTML Files
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Step 1 - Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Step 2 - Display Environment Information
+        run: |
+          echo "===================================="
+          echo "Running on GitHub Actions"
+          echo "Repository : ${{ github.repository }}"
+          echo "Branch     : ${{ github.ref_name }}"
+          echo "Commit ID  : ${{ github.sha }}"
+          echo "===================================="
+
+      - name: Step 3 - Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install HTMLHint and Stylelint
+      - name: Step 4 - Verify Node and NPM Versions
         run: |
+          echo "Checking Node.js installation..."
+          node --version
+          npm --version
+
+      - name: Step 5 - Install HTMLHint
+        run: |
+          echo "Installing HTMLHint..."
           npm install -g htmlhint
-          npm install -g stylelint stylelint-config-standard
+          echo "HTMLHint installed successfully."
 
-      - name: Lint HTML
-        run: htmlhint "**/*.html"
+      - name: Step 6 - Lint HTML Files
+        run: |
+          echo "Starting HTML validation..."
+          htmlhint "**/*.html"
+          echo "HTML validation completed successfully."
 
-    #  - name: Lint CSS
-    #    run: stylelint "**/*.css"
+      - name: Step 7 - Workflow Completed
+        run: |
+          echo "===================================="
+          echo "HTML linting completed successfully."
+          echo "Workflow finished without errors."
+          echo "===================================="
+
+      # Uncomment when CSS linting is configured
+      #
+      # - name: Step 7 - Install Stylelint
+      #   run: |
+      #     npm install -g stylelint stylelint-config-standard
+      #
+      # - name: Step 8 - Lint CSS Files
+      #   run: |
+      #     stylelint "**/*.css"
