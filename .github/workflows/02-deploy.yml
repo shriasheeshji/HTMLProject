@@ -1,4 +1,4 @@
-name: Deploy Static Content to Pages
+name: Deploy Static Content to GitHub Pages
 
 on:
   workflow_run:
@@ -16,25 +16,45 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # 🚀 Deploy to GitHub Pages
   deploy:
+    name: Deploy Website
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
+
+      - name: Step 1 - Display Deployment Information
+        run: |
+          echo "========================================"
+          echo "GitHub Pages Deployment Started"
+          echo "Repository : ${{ github.repository }}"
+          echo "Workflow   : ${{ github.workflow }}"
+          echo "Triggered By Previous Workflow"
+          echo "========================================"
+
+      - name: Step 2 - Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Pages
+      - name: Step 3 - Configure GitHub Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload Artifact
+      - name: Step 4 - Upload Website Files
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: "."
 
-      - name: Deploy to GitHub Pages
+      - name: Step 5 - Deploy Website to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Step 6 - Display Deployment URL
+        run: |
+          echo "========================================"
+          echo "Deployment Completed Successfully!"
+          echo "Website URL:"
+          echo "${{ steps.deployment.outputs.page_url }}"
+          echo "========================================"
