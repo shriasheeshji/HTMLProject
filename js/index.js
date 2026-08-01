@@ -42,7 +42,8 @@ function login() {
 
     if (
         (username === "admin" && password === "nimda") ||
-        (username === "samAdmin" && password === "NimdaSAM")
+        (username === "samAdmin" && password === "NimdaSAM") ||
+        (username === "hello" && password === "world")
     ) {
 
         localStorage.setItem("loggedIn", "true");
